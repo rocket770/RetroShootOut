@@ -45,6 +45,10 @@ public class PVPArena extends World
         // Loops music to cycle when playing
         backgroundMusic.playLoop();
         Bar Bar2 = new Bar("Player2", 10, 10);
+        Lives livep2 = new Lives("Player2");
+        addObject(livep2, 845, 760);
+        Lives livep1 = new Lives("Player1");
+        addObject(livep1, 145, 760);
         addObject(Bar2, 845,320);
         enableEnemy();
         Players.gotPowerUp = false;
