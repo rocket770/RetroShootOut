@@ -40,11 +40,11 @@ public class PVPArena extends World
         // Create a new world with 1000x700 cells with a cell size of 1x1 pixels.
         super(1000, 700, 1);
         setPaintOrder(Players.class, Bar.class, EnemyAI.class, PowersUps.class, ground.class, dirt.class);
-        Bar Bar1 = new Bar("Player1", 100, 100);
+        Bar Bar1 = new Bar("Player1", 1, 1);
         addObject(Bar1, 295,350);
         // Loops music to cycle when playing
         backgroundMusic.playLoop();
-        Bar Bar2 = new Bar("Player2", 10, 10);
+        Bar Bar2 = new Bar("Player2", 1, 1);
         addObject(Bar2, 845,320);
         enableEnemy();
         Players.gotPowerUp = false;
