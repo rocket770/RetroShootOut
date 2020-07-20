@@ -33,12 +33,12 @@ public class PVPArena extends World
 
     private int x;
     private int y;
-   // Sets vairable to control sound file through other classes or loop it
+    // Sets vairable to control sound file through other classes or loop it
     GreenfootSound backgroundMusic = new GreenfootSound("MenuMusic.mp3");
     public PVPArena()
     {
         // Create a new world with 1000x700 cells with a cell size of 1x1 pixels.
-        super(1000, 700, 1);
+        super(1000, 900, 1);
         setPaintOrder(Players.class, Bar.class, EnemyAI.class, PowersUps.class, ground.class, dirt.class);
         Bar Bar1 = new Bar("Player1", 10, 10);
         addObject(Bar1, 295,350);
@@ -75,7 +75,6 @@ public class PVPArena extends World
         int spawnChance = Greenfoot.getRandomNumber(ChanceOffset);
         // vairable to chose power up spawn type, based on the different power ups avaible
         int spawnType = Greenfoot.getRandomNumber(4);
-
         // Will ensure there is no power up already activated and if the chance is met.
         //System.out.println("spawnChance/n: " +spawnChance +"spawnType: " +spawnType);                         // check both types in seperate lines with /n
         if (spawnChance == 1 && getObjects(PowersUps.class).isEmpty() && Players.gotPowerUp == false)
@@ -86,9 +85,15 @@ public class PVPArena extends World
                 int j = Greenfoot.getRandomNumber(600);
                 Random r = new Random();
                 Actor ground = (ground) getObjects(ground.class).get(0); // get reference to ground objects
-                if (i !=  r.nextInt(ground.getX()) + 10 || i != r.nextInt(ground.getX()) - 10) x = i;
-                if (j != r.nextInt(ground.getY()) + 10  ||j != r.nextInt(ground.getY()) - 10) y = j;    // Grabs random ground object in world and spwans power up at a +/- 10 offset
-                switch(spawnType)
+                if (i !=  r.nextInt(ground.getX()) + 10 || i != r.nextInt(ground.getX()) - 10)
+                {
+                    x = i;
+                }
+                if (j != r.nextInt(ground.getY()) + 10  ||j != r.nextInt(ground.getY()) - 10) 
+                {
+                    y = j;    // Grabs random ground object in world and spwans power up at a +/- 10 offset
+                }
+                    switch(spawnType)
                 {
                     case 0:  addObject(new hpUp(), x, y);
                     break;
