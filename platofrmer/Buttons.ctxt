@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Buttons
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Buttons\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=void\ act()
+comment2.params=imagename\ images
+comment2.target=void\ animation(java.lang.String,\ int)
+comment3.params=
+comment3.target=void\ switchButton()
+numComments=4

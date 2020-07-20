@@ -1,0 +1,228 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
+/**
+ * Write a description of class enemyAI here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class EnemyAI extends Actor
+{
+    /**
+     * Act - do whatever the enemyAI wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    private int xvel = 4;
+    private int ySpeed; //current vertical speed
+    private int acceleration = 1;
+    private int jumpHeight = -20;
+    private int moveDelay = 0;
+    private int bounceCount = 0;
+    private int aiDelay =100;
+    private int imageDelay = 0;
+    private int ImageChangeSpeed = 10;
+    // The image the animation should start at
+    private int imageNumber = 1;
+    // Non-Abstrsct Object position in world passed to other classes
+    public static int x;
+    public static int y;
+    public void act()
+    {
+        defaultMove();
+        followEnemy();
+        animateOnWalk();
+        removeTouching(PowersUps.class);
+        checkFall();
+        stuckCheck();
+        x = getX();
+        y = getY();
+        hpUpdate();
+    }
+
+    private void defaultMove()
+    {
+        ground leftfloor = (ground) getOneObjectAtOffset(-getImage().getWidth()/2-1, 0, ground.class); // Check cell left of current position for a floor
+        ground rightfloor = (ground) getOneObjectAtOffset(getImage().getWidth()/2+1, 0 , ground.class); // Check cell right of current position for a floor
+        setLocation(getX()+xvel,getY());
+        //getWorld().showText("Bounce: " +bounceCount, 100,100);
+        if(moveDelay >=30 && rightfloor != null || leftfloor !=null && moveDelay >=30 || getX() <= 5 || getX() >= 995)
+        {
+            xvel = -xvel;
+            moveDelay = 0;
+            bounceCount++;
+        }
+        if(bounceCount > 2 && rightfloor != null || bounceCount > 2 && leftfloor != null)
+        {
+            int SearchPhaseOffset = Greenfoot.getRandomNumber(25);
+            if(SearchPhaseOffset < bounceCount || bounceCount == 10)
+            {
+                xvel = -xvel;    //reset to original value before next bounce
+                ySpeed = jumpHeight;
+                fall();
+                bounceCount = 0;
+            }
+        }
+        moveDelay++;
+    }
+
+    protected void stuckCheck()
+    {
+        // Fixes greenfoots broken collosions where bojects can sometimes get stuck in the ground
+        while(getOneObjectAtOffset(0,getImage().getHeight()/2-1, ground.class)!=null)
+        {
+            setLocation(getX(),getY()-1);
+        }
+        while(getOneObjectAtOffset(0,-getImage().getHeight()/2+1, ground.class)!=null)
+        {
+            setLocation(getX(),getY()+1);
+        }
+    }
+
+    private void animateOnWalk()
+    {
+        switch(xvel)
+        {
+            case 2: //Animation() Right
+            break;
+            case -2: //Animation(String ,int) Left Animation(enemyLeft, 3);
+            break;
+        }
+    }
+
+    private void Animation(String imagename, int images)
+    {
+        // Animation for object, image file name should look like: FILENAME0 FILENAME1 etc...
+        if (imageDelay == ImageChangeSpeed)
+        {
+            // Adds a delay between images
+            imageNumber++;
+            if(imageNumber > images)
+            {
+                // resets the image it must change to back to the start when cycle is complete
+                imageNumber = 1;
+                //getWorld().showText("imageDelay check: " + imageDelay, 250, 250);
+            }
+            // reset delay
+            imageDelay = 0;
+        }
+        imageDelay++;
+        setImage(imagename + imageNumber + ".png");
+        getImage().scale(getImage().getWidth()-10,getImage().getHeight()-20);
+    }
+
+    private void checkFall()
+    {
+        if (onGround() == false)
+        {
+            fall();
+        }
+        else
+        {
+            ySpeed = 0;
+        }
+        if(onRoof())
+        {
+            setLocation(getX(),getY()-ySpeed+1);
+            ySpeed += acceleration*2;
+        }
+    }
+
+    private void followEnemy()
+    {
+        ground leftfloor = (ground) getOneObjectAtOffset(-getImage().getWidth()/2-1, 0, ground.class); // Check cell left of current position for a floor
+        ground rightfloor = (ground) getOneObjectAtOffset(getImage().getWidth()/2+1, 0 , ground.class); // Check cell right of current position for a floor
+        List<Players> group = getObjectsInRange(300,Players.class);
+        //getWorld().showText("right: " +rightTarget, 390,450);
+        //getWorld().showText("left: " +leftTarget, 390,430);
+        //getWorld().showText("aiDelay: " +aiDelay, 390,410);
+
+        if(group.size() > 0 )
+        {
+            //move(xvel);
+            Actor Player = group.get(0);
+            // Get closests players position (Prioritises player 1)
+            int pX = Player.getX();
+            int pY = Player.getY();
+            //Dont jump if player is below enemy
+            if(onGround() && pY < getY() && (leftfloor != null || rightfloor != null))
+            {
+                //System.out.println("Above and left side");
+                ySpeed = jumpHeight;
+                fall();
+                aiDelay = 15;
+            }
+            // Check if AI has moved near player (Attacked) so it someitmes moves away and does not constantly stay on player
+            if(getX() == pX - 5 || getX() == pX +5)
+            {
+                aiDelay = 100;
+            }
+            // If can move, set direction relative to the players position 
+            if (aiDelay <= 0)
+            {
+                if(pX < getX() && pY > getY() - 5)
+                {
+                    xvel = -4; //leftTarget = true;  rightTarget = false;
+                }
+                else if (pX > getX() && pY > getY() -5)
+                {
+                    xvel = 4;  //leftTarget = false;  rightTarget = true;
+                }
+            }
+        }
+
+        aiDelay--;
+    }
+
+    private void hpUpdate()
+    {
+        for (Object Bar3 : getWorld().getObjects(Bar.class))
+        {
+            Bar enemy = (Bar) Bar3;
+            if(enemy.refName == "Enemy " && isTouching(Bullet.class))
+            {
+                enemy.subtract(2);
+                removeTouching(Bullet.class);
+            }
+            // drops random powerup on death that is not already in world
+            if(enemy.getValue() == 0)
+            {
+                int spawnType = Greenfoot.getRandomNumber(4);
+                // Will ensure there is no power up already activated and if the chance is met.
+                //System.out.println("spawnChance/n: " +spawnChance +"spawnType: " +spawnType);                         // check both types in seperate lines with /n
+                // can change to x,y staitc vairable declared above (Change)
+                switch(spawnType)
+                {
+                    case 0:  getWorld().addObject(new hpUp(), getX(), getY());
+                    break;
+                    case 1:  getWorld().addObject(new fastBullets(),getX(), getY());
+                    break;
+                    case 2:  getWorld().addObject(new rapidFire(), getX(), getY());
+                    break;
+                    case 3:  getWorld().addObject(new SpeedBoost(), getX(), getY());
+                    break;
+                }
+                getWorld().removeObject(enemy);
+                getWorld().removeObject(this);
+            }
+        }
+    }
+
+    private void fall()
+    {
+        setLocation(getX(),getY()+ySpeed);
+        ySpeed += acceleration;
+    }
+
+    private boolean onGround()
+    {
+        Actor floor = getOneObjectAtOffset(0,getImage().getHeight()/2+1, ground.class);
+        return floor != null;
+    }
+
+    private boolean onRoof()
+    {
+        Actor roof = getOneObjectAtOffset(0,-getImage().getHeight()/2-1, ground.class);
+        return roof != null;
+    }
+
+}

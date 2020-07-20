@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Bar
+comment1.params=referenceName\ initValue\ maximumValue
+comment1.target=Bar(java.lang.String,\ int,\ int)
+comment2.params=
+comment2.target=void\ newImage()
+comment3.params=amount
+comment3.target=void\ add(int)
+comment4.params=amount
+comment4.target=void\ subtract(int)
+comment5.params=
+comment5.target=void\ checkValue()
+comment6.params=
+comment6.target=void\ act()
+comment7.params=
+comment7.target=int\ getValue()
+numComments=8
