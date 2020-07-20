@@ -27,8 +27,8 @@ public class PVPArena extends World
             "  p     gd  gddgg        ",
             "        ddggdddddg       ",
             "ggggggggddddddddddggggggg",
-            "ddddddddddddddddddddddddd",
             "ddddddddddddddddddddddddd"
+            //"ddddddddddddddddddddddddd"
         };
 
     private int x;
@@ -37,8 +37,8 @@ public class PVPArena extends World
     GreenfootSound backgroundMusic = new GreenfootSound("MenuMusic.mp3");
     public PVPArena()
     {
-        // Create a new world with 1000x700 cells with a cell size of 1x1 pixels.
-        super(1000, 900, 1);
+        // Create a new world with 1000x800 cells with a cell size of 1x1 pixels.
+        super(1000, 800, 1);
         setPaintOrder(Players.class, Bar.class, EnemyAI.class, PowersUps.class, ground.class, dirt.class);
         Bar Bar1 = new Bar("Player1", 10, 10);
         addObject(Bar1, 295,350);
