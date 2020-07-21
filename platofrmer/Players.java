@@ -74,6 +74,10 @@ public abstract class Players extends Actor
         getWorld().removeObjects(getWorld().getObjects(PowersUps.class));
         getWorld().removeObjects(getWorld().getObjects(Bar.class));
         getWorld().removeObjects(getWorld().getObjects(EnemyAI.class));
+        getWorld().removeObjects(getWorld().getObjects(Lives.class));
+        getWorld().showText("", 305,760);
+        getWorld().showText("", 675,760);
+        getWorld().showText("", 500,750);
         // Iterate through each player object in the world by casting the list into a for loop
         for (Object obj : (java.util.List<Players>)getWorld().getObjects(Players.class))
         {
@@ -149,8 +153,8 @@ public abstract class Players extends Actor
         getWorld().showText(Player1.p1powerup +"\n\n"+Math.abs(Math.round(Player1.p1TimeLeft/60 * 100.0)) / 100.0, 305,760);
         getWorld().showText(Player2.p2powerup +"\n\n" +Math.abs(Math.round(Player2.p2TimeLeft/60 * 100.0)) / 100.0, 675,760);
         //System.out.println(p2powerup);
-        getWorld().showText("p1 Lives: " +Player1.p1Lives,450,250);
-        getWorld().showText("p2 Lives: " +Player2.p2Lives,450,230);
+        //getWorld().showText("p1 Lives: " +Player1.p1Lives,450,250);
+        //getWorld().showText("p2 Lives: " +Player2.p2Lives,450,230);
     }
 
     protected void speedBoost(String ClassName)

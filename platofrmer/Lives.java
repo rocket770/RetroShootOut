@@ -31,6 +31,6 @@ public class Lives extends Actor
             case "Player1": remainingHP = Player1.p1Lives; break;
             case "Player2": remainingHP = Player2.p2Lives; break;
         }
-        setImage("heart"+remainingHP+".png");
+        if(remainingHP > 0) setImage("heart"+remainingHP+".png");
     }
 }
