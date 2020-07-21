@@ -68,6 +68,7 @@ public abstract class Players extends Actor
 
     protected void endGame(String Class)
     {
+
         getWorld().setBackground(new GreenfootImage(Class +"won.png"));
         getWorld().removeObjects(getWorld().getObjects(ground.class));
         getWorld().removeObjects(getWorld().getObjects(Bullet.class));
@@ -75,9 +76,6 @@ public abstract class Players extends Actor
         getWorld().removeObjects(getWorld().getObjects(Bar.class));
         getWorld().removeObjects(getWorld().getObjects(EnemyAI.class));
         getWorld().removeObjects(getWorld().getObjects(Lives.class));
-        getWorld().showText("", 305,760);
-        getWorld().showText("", 675,760);
-        getWorld().showText("", 500,750);
         // Iterate through each player object in the world by casting the list into a for loop
         for (Object obj : (java.util.List<Players>)getWorld().getObjects(Players.class))
         {
@@ -85,9 +83,13 @@ public abstract class Players extends Actor
             Players player = (Players) obj;
             player.setImage(new GreenfootImage(1,1));
         }
+        getWorld().showText("", 305,760);
+        getWorld().showText("", 675,760);
+        getWorld().showText("", 500,750);
         ((PVPArena)getWorld()).backgroundMusic.stop();  // Cast world type to static refernece
         Greenfoot.stop();
-    }   
+
+    }
 
     protected void checkFall()
     {
@@ -144,7 +146,7 @@ public abstract class Players extends Actor
         Actor roof = getOneObjectAtOffset(0,-getImage().getHeight()/2- 1, ground.class);
         return roof != null;
     }
-    
+
     protected void displayPowerUp()
     {
         time++;
