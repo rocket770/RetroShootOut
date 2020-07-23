@@ -1,23 +1,22 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Meny here.
+ * Write a description of class Help here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class StartScreen extends World
+public class Help extends World
 {
 
     /**
-     * Constructor for objects of class Meny.
+     * Constructor for objects of class Help.
      * 
      */
-    public StartScreen()
+    public Help()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1000, 700, 1); 
-        Greenfoot.start();
+        super(600, 400, 1); 
         prepare();
     }
 
@@ -27,8 +26,7 @@ public class StartScreen extends World
      */
     private void prepare()
     {
-        addObject(new HelpButton(),314,224);
-        addObject(new StartButton(),454,222);
-        addObject(new SelectEnemy(),89,340);
+        StartButton startButton = new StartButton();
+        addObject(startButton,293,226);
     }
 }

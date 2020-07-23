@@ -46,7 +46,7 @@ public class HelpButton extends Buttons
     {
         if(canChange && Greenfoot.isKeyDown("Enter"))
         {
-            //Greenfoot.setWorld(new HelpMenu());
+            Greenfoot.setWorld(new Help());
         }
     }
 

@@ -12,8 +12,10 @@ public class Lives extends Actor
      * Act - do whatever the Lives wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    String player; 
-    int remainingHP;
+    // Converts Player string from contsutocr into non-staric variable that the object can use
+    private String player; 
+    // Used to determin the remaing lives of the object that this class is represneting 
+    private int remainingHP;
     public void act() 
     {
        updateLives();
@@ -23,7 +25,7 @@ public class Lives extends Actor
     {
         player = Player;
     }
-    
+    // Update heart image based on the remaing health this object is representing. 
     public void updateLives()
     {
         switch(player)

@@ -41,11 +41,11 @@ public class StartButton extends Buttons
         }
          // Makes sure the animation will always play if in help screen
          // So the user cannot select a button that is not there
-        // if (getWorld() instanceof HelpMenu)
-        // {
-            // animation("Images/Start", 1); 
-            // canChange = true;
-        // }
+        if (getWorld() instanceof Help)
+        {
+            animation("Images/Start", 1); 
+            canChange = true;
+        }
     }
 
     // Chnages world if selected and user pressets enter
