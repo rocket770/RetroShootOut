@@ -12,6 +12,7 @@ public abstract class Players extends Actor
      * Act - do whatever the Players wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+
     private double time = 0.0F;
     public static boolean gotPowerUp = false;
 
@@ -68,7 +69,6 @@ public abstract class Players extends Actor
 
     protected void endGame(String Class)
     {
-
         getWorld().setBackground(new GreenfootImage(Class +"won.png"));
         getWorld().removeObjects(getWorld().getObjects(ground.class));
         getWorld().removeObjects(getWorld().getObjects(Bullet.class));
@@ -88,7 +88,6 @@ public abstract class Players extends Actor
         getWorld().showText("", 500,750);
         ((PVPArena)getWorld()).backgroundMusic.stop();  // Cast world type to static refernece
         Greenfoot.stop();
-
     }
 
     protected void checkFall()
@@ -150,6 +149,7 @@ public abstract class Players extends Actor
     protected void displayPowerUp()
     {
         time++;
+
         getWorld().showText("Time: " +Math.round(time/60 * 100.0)/100.0, 500,750);
         // Converts float to 2DP, ignores negative values when 2 power ups are active at once.
         getWorld().showText(Player1.p1powerup +"\n\n"+Math.abs(Math.round(Player1.p1TimeLeft/60 * 100.0)) / 100.0, 305,760);
