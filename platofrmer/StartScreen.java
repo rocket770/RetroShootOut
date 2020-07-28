@@ -27,8 +27,8 @@ public class StartScreen extends World
      */
     private void prepare()
     {
-        addObject(new HelpButton(),314,224);
-        addObject(new StartButton(),454,222);
+        addObject(new HelpButton(),500,525);
+        addObject(new StartButton(),500,350);
         addObject(new SelectEnemy(),89,340);
     }
 }
