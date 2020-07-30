@@ -14,9 +14,23 @@ public class SelectEnemy extends Buttons
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() {
-    if (Greenfoot.mouseClicked(this)) {
-        enableAI = !enableAI;
+        checkSwitch();
+    }   
+    
+    private void checkSwitch() {
+         if (Greenfoot.mouseClicked(this)) {
+            enableAI = !enableAI;
+        }
+        updateImage();
+        getImage().scale(getImage().getWidth()/2, getImage().getHeight()/2);
     }
-    getWorld().showText("AI: "+enableAI, 250,250);
-}    
+    
+    private void updateImage() {
+       int imageType = (enableAI) ? 1 : 0;  // Cast refernce 
+       switch(imageType) {
+           case 1: setImage("ai enable.png"); break;
+           case 0: setImage("ai disable.png"); break;
+        }
+    }
+    
 }

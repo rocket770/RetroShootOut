@@ -13,6 +13,7 @@ public class Bar extends Actor
 
     public Bar(String referenceName, int initValue, int maximumValue)
     {
+        // I realize i can use less varables whilst delcaring each passed through the constuctur with "this.referenceName"
         refName = referenceName;
         maxValue = maximumValue; //The highest the bar amount the bar will go
         add(initValue); //Sets initial value of health,
@@ -21,7 +22,7 @@ public class Bar extends Actor
     private void newImage()
     {
         int imgWidth = BAR_WIDTH + 10 * (refName.length() + 2); // Creates an image with the size of the given width, accounting for the text it will display at the end
-        int barValue = (int) (BAR_WIDTH * value / maxValue);    // gets % value of health compared to max health (converted from a float to an int)
+        int barValue = (int) (BAR_WIDTH * value / maxValue);    // gets % value of health compared to max health (converted/casted from a float to an int)
         GreenfootImage image = new GreenfootImage(imgWidth, 20);
         switch(refName)
         {

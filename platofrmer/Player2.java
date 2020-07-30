@@ -57,6 +57,8 @@ public class Player2 extends Players
             //Greenfoot.playSound("shoot.wav");
             p2shootdelay = 0;
             // resets delay
+            Greenfoot.playSound("gunshot.mp3");
+
         }
         // will increase the delay until the player is able to shoot
         if (p2shootdelay <= p2shootOffset)
@@ -91,6 +93,7 @@ public class Player2 extends Players
             if(player2.getValue() == 0)
             {
                 p2Lives--;
+                Greenfoot.playSound("deathsound.mp3");
                 setLocation(840,360);
                 player2.add(10);
             }
