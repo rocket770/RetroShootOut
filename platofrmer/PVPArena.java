@@ -28,7 +28,7 @@ public class PVPArena extends World
             "        ddggdddddg       ",
             "ggggggggddddddddddggggggg",
             "ddddddddddddddddddddddddd"
-            //"ddddddddddddddddddddddddd"
+                //"ddddddddddddddddddddddddd"
         };
 
     private int x;
@@ -89,15 +89,10 @@ public class PVPArena extends World
                 int j = Greenfoot.getRandomNumber(600);
                 Random r = new Random();
                 Actor ground = (ground) getObjects(ground.class).get(0); // get reference to ground objects
-                if (i !=  r.nextInt(ground.getX()) + 10 || i != r.nextInt(ground.getX()) - 10)
-                {
-                    x = i;
-                }
-                if (j != r.nextInt(ground.getY()) + 10  ||j != r.nextInt(ground.getY()) - 10) 
-                {
-                    y = j;    // Grabs random ground object in world and spwans power up at a +/- 10 offset
-                }
-                    switch(spawnType)
+                // Grabs random ground object in world and spwans power up at a +/- 10 offset
+                if (i !=  r.nextInt(ground.getX()) + 10 || i != r.nextInt(ground.getX()) - 10) x = i;
+                if (j != r.nextInt(ground.getY()) + 10  ||j != r.nextInt(ground.getY()) - 10) y = j;
+                switch(spawnType)
                 {
                     case 0:  addObject(new hpUp(), x, y);
                     break;

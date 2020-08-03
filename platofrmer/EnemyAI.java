@@ -142,7 +142,9 @@ public class EnemyAI extends Actor
             Actor Player = group.get(0);
             // Get closests players position (Prioritises player 1)
             int pX = Player.getX();
-            int pY = Player.getY();
+            int pY = Player.getY();      
+            
+            getWorld().getBackground().drawLine(pX, pY, getX(), getY());
             //Dont jump if player is below enemy
             if(onGround() && pY < getY() && (leftfloor != null || rightfloor != null))
             {
