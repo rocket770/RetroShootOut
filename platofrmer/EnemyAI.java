@@ -129,54 +129,58 @@ public class EnemyAI extends Actor
 
     private void followEnemy()
     {
-        ground leftfloor = (ground) getOneObjectAtOffset(-getImage().getWidth()/2-1, 0, ground.class); // Check cell left of current position for a floor
-        ground rightfloor = (ground) getOneObjectAtOffset(getImage().getWidth()/2+1, 0 , ground.class); // Check cell right of current position for a floor
-        List<Players> group = getObjectsInRange(300,Players.class);
+        List<Players> playergroup = getObjectsInRange(300,Players.class);
         //getWorld().showText("right: " +rightTarget, 390,450);
         //getWorld().showText("left: " +leftTarget, 390,430);
         //getWorld().showText("aiDelay: " +aiDelay, 390,410);
-
-        if(group.size() > 0 )
-        {
-            //move(xvel);
-            Actor Player = group.get(0);
+        List<PowersUps> powerups = getObjectsInRange(300,PowersUps.class);
+        if(playergroup.size() > 0 )  {
+            Actor Player = playergroup.get(0);
             // Get closests players position (Prioritises player 1)
             int pX = Player.getX();
-            int pY = Player.getY();      
-            getWorld().setBackground("background.png");
-            getWorld().getBackground().drawLine(pX, pY, x, y);
-            
+            int pY = Player.getY();
             //Dont jump if player is below enemy
-            if(onGround() && pY < getY() && (leftfloor != null || rightfloor != null))
-            {
-                //System.out.println("Above and left side");
-                ySpeed = jumpHeight;
-                fall();
-                aiDelay = 15;
-            }
-            // Check if AI has moved near player (Attacked) so it someitmes moves away and does not constantly stay on player
-            if(getX() == pX - 5 || getX() == pX +5)
-            {
-                aiDelay = 100;
-            }
-            if(getY() < pY) aiDelay  = 50; /* FIX PATH FINDING BUT MAKE MORE STUPID*/
-            
-            // If can move, set direction relative to the players position 
-            if (aiDelay <= 0)
-            {
-                if(pX < getX() && pY > getY() - 5)
-                {
-                    xvel = -4; //leftTarget = true;  rightTarget = false;
-                }
-                else if (pX > getX() && pY > getY() -5)
-                {
-                    xvel = 4;  //leftTarget = false;  rightTarget = true;
-                }
-            }
+            pathFind(pX, pY);
+        }
+        else if(powerups.size() > 0) {
+            Actor PowersUps = powerups.get(0);
+            int tX = PowersUps.getX();
+            int tY = PowersUps.getY();
+            pathFind(tX, tY);
         }
         else   getWorld().setBackground("background.png");
+    }
 
-
+    private void pathFind(int targetX, int targetY) {
+        ground leftfloor = (ground) getOneObjectAtOffset(-getImage().getWidth()/2-1, 0, ground.class); // Check cell left of current position for a floor
+        ground rightfloor = (ground) getOneObjectAtOffset(getImage().getWidth()/2+1, 0 , ground.class); // Check cell right of current position for a floor
+        if(onGround() && targetY < getY() && (leftfloor != null || rightfloor != null))
+        {
+            //System.out.println("Above and left side");
+            ySpeed = jumpHeight;
+            fall();
+            aiDelay = 15;
+        }
+        // Check if AI has moved near player (Attacked) so it someitmes moves away and does not constantly stay on player
+        if(getX() == targetX - 3 || getX() == targetX +3)
+        {
+            aiDelay = 100;
+        }
+        //if(getY() < pY) aiDelay  = 50; /* FIX PATH FINDING BUT MAKE MORE STUPID*/
+        // If can move, set direction relative to the players position 
+        if (aiDelay <= 0)
+        {
+            if(targetX < getX() && targetY > getY() - 5)
+            {
+                xvel = -4; //leftTarget = true;  rightTarget = false;
+            }
+            else if (targetX > getX() && targetY > getY() -5)
+            {
+                xvel = 4;  //leftTarget = false;  rightTarget = true;
+            }
+        }
+        getWorld().setBackground("background.png");
+        getWorld().getBackground().drawLine(targetX, targetY, x, y);
         aiDelay--;
     }
 
