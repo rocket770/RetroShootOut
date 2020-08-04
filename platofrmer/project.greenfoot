@@ -1,5 +1,6 @@
 #Greenfoot project file
 class.EnemyAI.image=camel.png
+class.Help.image=help.png
 class.Lives.image=heart.png
 class.PVPArena.image=background.png
 class.Player1.image=p1_still.png
@@ -201,10 +202,10 @@ dependency8.type=UsesDependency
 dependency9.from=PVPArena
 dependency9.to=hpUp
 dependency9.type=UsesDependency
-editor.fx.0.height=0
-editor.fx.0.width=0
-editor.fx.0.x=0
-editor.fx.0.y=0
+editor.fx.0.height=737
+editor.fx.0.width=814
+editor.fx.0.x=232
+editor.fx.0.y=-19
 height=694
 package.numDependencies=62
 package.numTargets=23

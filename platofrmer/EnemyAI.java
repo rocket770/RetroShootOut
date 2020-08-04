@@ -143,8 +143,9 @@ public class EnemyAI extends Actor
             // Get closests players position (Prioritises player 1)
             int pX = Player.getX();
             int pY = Player.getY();      
+            getWorld().setBackground("background.png");
+            getWorld().getBackground().drawLine(pX, pY, x, y);
             
-            getWorld().getBackground().drawLine(pX, pY, getX(), getY());
             //Dont jump if player is below enemy
             if(onGround() && pY < getY() && (leftfloor != null || rightfloor != null))
             {
@@ -158,6 +159,8 @@ public class EnemyAI extends Actor
             {
                 aiDelay = 100;
             }
+            if(getY() < pY) aiDelay  = 50; /* FIX PATH FINDING BUT MAKE MORE STUPID*/
+            
             // If can move, set direction relative to the players position 
             if (aiDelay <= 0)
             {
@@ -171,6 +174,8 @@ public class EnemyAI extends Actor
                 }
             }
         }
+        else   getWorld().setBackground("background.png");
+
 
         aiDelay--;
     }

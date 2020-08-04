@@ -5,7 +5,7 @@ import greenfoot.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class PowersUps extends Actor  
+public abstract class PowersUps extends Actor  
 {
     // intilize movement delay vairble to 0
     private int MoveDelay = 0;
