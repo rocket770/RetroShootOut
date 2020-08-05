@@ -40,8 +40,9 @@ public class Player2 extends Players
         getLocation();
         checkFall();
         getDirection();
-        hpUpdate();
         displayPowerUp();
+                hpUpdate();
+
         fastShoot("Player2");
         rapidShoot("Player2");
         speedBoost("Player2");
