@@ -12,17 +12,20 @@ public class StartButton extends Buttons
      * Act - do whatever the StartButton wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    
+    // Sets button to be selected by default
+    private boolean canChange = true;
+    // Delay insures world is not chnaged to "space world" instalty after help world is spanwed
+    private int delay = 0;
+    // Animation will only play if selecred
+    
     public void act() 
     {
         selectionAnimation();
         switchButton();
         changeWorld();
     }
-    // Sets button to be selected by default
-    private boolean canChange = true;
-    // Delay insures world is not chnaged to "space world" instalty after help world is spanwed
-    private int delay = 0;
-    // Animation will only play if selecred
+    
     private void selectionAnimation()
     {
         Buttons buttons = getWorld().getObjects(Buttons.class).get(0);

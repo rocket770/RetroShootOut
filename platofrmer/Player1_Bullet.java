@@ -12,28 +12,26 @@ public class Player1_Bullet extends Bullet
      * Act - do whatever the Player1_Bullet wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int xvelocity;
-    public static int moveSpeed = 2; 
-    public void act() 
-    {
-        moveSpeed = Player1.p1_bulletMoveSpeed;
-        setLocation(getX() + xvelocity, getY());
-        colision();
-    }  
+    private int xVelocity;
+    public static int moveSpeed = 2;
+
+    // bullet constructor applied each time spawned, more efficent then constructor
 
     public void addedToWorld(World world)
     { 
-        if(Player1.p1Direction == "right")
-        { 
-            xvelocity = moveSpeed;
+        switch(Player1.p1Direction) {
+            case "left": xVelocity = -moveSpeed; break;
+            case "right": xVelocity = moveSpeed; break;
         }
-        if(Player1.p1Direction == "left")
-        { 
-            xvelocity = -moveSpeed;
-        }
-        // USE CAQSEWHERE IT MORE EFFIENCET
     }
-    
-    
-    
+
+    public void act() 
+    {
+        moveSpeed = Player1.p1_bulletMoveSpeed;
+        setLocation(getX() + xVelocity, getY());
+        colision();
+    }  
+
 }
+    
+

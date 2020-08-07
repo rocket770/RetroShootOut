@@ -36,7 +36,7 @@ public class SelectEnemy extends Buttons
     }
 
     private void updateImage() {
-        int imageType = (enableAI) ? 1 : 0;  // Cast refernce to object type with if else equal switch 
+        int imageType = (enableAI) ? 1 : 0;  // switch with if else equal switch 
         switch(imageType) {
             case 1: setImage("ai enable.png"); break;
             case 0: setImage("ai disable.png"); break;

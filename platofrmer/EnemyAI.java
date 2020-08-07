@@ -12,7 +12,7 @@ public class EnemyAI extends Actor
      * Act - do whatever the enemyAI wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int xvel = 4;
+    private int xVel = 4;
     private int ySpeed; //current vertical speed
     private int acceleration = 1;
     private int jumpHeight = -20;
@@ -20,9 +20,10 @@ public class EnemyAI extends Actor
     private int bounceCount = 0;
     private int aiDelay =100;
     private int imageDelay = 0;
-    private int ImageChangeSpeed = 10;
+    private int imageChangeSpeed = 10;
     // The image the animation should start at
     private int imageNumber = 1;
+
     // Non-Abstrsct Object position in world passed to other classes
     public static int x;
     public static int y;
@@ -36,18 +37,18 @@ public class EnemyAI extends Actor
         stuckCheck();
         x = getX();
         y = getY();
-        hpUpdate();
+        healthLoss();
     }
 
     private void defaultMove()
     {
         ground leftfloor = (ground) getOneObjectAtOffset(-getImage().getWidth()/2-1, 0, ground.class); // Check cell left of current position for a floor
         ground rightfloor = (ground) getOneObjectAtOffset(getImage().getWidth()/2+1, 0 , ground.class); // Check cell right of current position for a floor
-        setLocation(getX()+xvel,getY());
+        setLocation(getX()+xVel,getY());
         //getWorld().showText("Bounce: " +bounceCount, 100,100);
         if(moveDelay >=30 && rightfloor != null || leftfloor !=null && moveDelay >=30 || getX() <= 5 || getX() >= 995)
         {
-            xvel = -xvel;
+            xVel = -xVel;
             moveDelay = 0;
             bounceCount++;
         }
@@ -56,7 +57,7 @@ public class EnemyAI extends Actor
             int SearchPhaseOffset = Greenfoot.getRandomNumber(25);
             if(SearchPhaseOffset < bounceCount || bounceCount == 10)
             {
-                xvel = -xvel;    //reset to original value before next bounce
+                xVel = -xVel;    //reset to original value before next bounce
                 ySpeed = jumpHeight;
                 fall();
                 bounceCount = 0;
@@ -80,11 +81,11 @@ public class EnemyAI extends Actor
 
     private void animateOnWalk()
     {
-        switch(xvel)
+        switch(xVel)
         {
-            case 2: //Animation() Right
+            case 4: 
             break;
-            case -2: //Animation(String ,int) Left Animation(enemyLeft, 3);
+            case -4: 
             break;
         }
     }
@@ -92,7 +93,7 @@ public class EnemyAI extends Actor
     private void Animation(String imagename, int images)
     {
         // Animation for object, image file name should look like: FILENAME0 FILENAME1 etc...
-        if (imageDelay == ImageChangeSpeed)
+        if (imageDelay == imageChangeSpeed)
         {
             // Adds a delay between images
             imageNumber++;
@@ -148,9 +149,10 @@ public class EnemyAI extends Actor
             int tY = PowersUps.getY();
             pathFind(tX, tY);
         }
-        else   getWorld().setBackground("background.png");
+        else   getWorld().setBackground(new GreenfootImage("background.png"));
     }
 
+    
     private void pathFind(int targetX, int targetY) {
         ground leftfloor = (ground) getOneObjectAtOffset(-getImage().getWidth()/2-1, 0, ground.class); // Check cell left of current position for a floor
         ground rightfloor = (ground) getOneObjectAtOffset(getImage().getWidth()/2+1, 0 , ground.class); // Check cell right of current position for a floor
@@ -164,27 +166,21 @@ public class EnemyAI extends Actor
         // Check if AI has moved near player (Attacked) so it someitmes moves away and does not constantly stay on player
         if(getX() == targetX - 3 || getX() == targetX +3)
         {
-            aiDelay = 100;
+            aiDelay = 50;
         }
-        //if(getY() < pY) aiDelay  = 50; /* FIX PATH FINDING BUT MAKE MORE STUPID*/
+        //if(getY() < targetY && getX() == targetX) aiDelay  = 5; /* FIX PATH FINDING BUT LIMIT TRACE*/
         // If can move, set direction relative to the players position 
-        if (aiDelay <= 0)
+        if (aiDelay <= 0 && targetY > getY() -5)
         {
-            if(targetX < getX() && targetY > getY() - 5)
-            {
-                xvel = -4; //leftTarget = true;  rightTarget = false;
-            }
-            else if (targetX > getX() && targetY > getY() -5)
-            {
-                xvel = 4;  //leftTarget = false;  rightTarget = true;
-            }
+            xVel = (targetX < getX()) ? -4 : 4;
         }
-        getWorld().setBackground("background.png");
+        getWorld().setBackground(new GreenfootImage("background.png"));
         getWorld().getBackground().drawLine(targetX, targetY, x, y);
+
         aiDelay--;
     }
 
-    private void hpUpdate()
+    private void healthLoss()
     {
         for (Object Bar3 : getWorld().getObjects(Bar.class))
         {

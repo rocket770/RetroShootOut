@@ -26,8 +26,6 @@ public class HelpButton extends Buttons
     {
         Buttons buttons = getWorld().getObjects(Buttons.class).get(0); // Converts actor value into object
         boolean Start = buttons.start;
-        
-        
         // Change to switch statement maybe - faster efficent code
         if(Start == false)
         {

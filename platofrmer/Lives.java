@@ -16,15 +16,17 @@ public class Lives extends Actor
     private String player; 
     // Used to determin the remaing lives of the object that this class is represneting 
     private int remainingHP;
+    
+       public Lives(String player)
+    {
+        this.player = player;
+    }
+    
     public void act() 
     {
        updateLives();
     }  
-    
-    public Lives(String Player)
-    {
-        player = Player;
-    }
+
     // Update heart image based on the remaing health this object is representing. 
     public void updateLives()
     {

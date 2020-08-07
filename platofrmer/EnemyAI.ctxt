@@ -24,5 +24,5 @@ comment7.target=void\ followEnemy()
 comment8.params=targetX\ targetY
 comment8.target=void\ pathFind(int,\ int)
 comment9.params=
-comment9.target=void\ hpUpdate()
+comment9.target=void\ healthLoss()
 numComments=13

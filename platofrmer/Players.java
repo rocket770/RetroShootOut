@@ -18,16 +18,16 @@ public abstract class Players extends Actor
 
     private int speed =3;
     private boolean gotSpeedBoost = false;
-    private final int SPEED_BOOST_TIMER = 300;
-    private int speedBoostTimeLeft = SPEED_BOOST_TIMER;
+    private final int speed_boost_timer = 300;
+    private int speedBoostTimeLeft = speed_boost_timer;
 
     private boolean gotFastShoot = false;
-    private final int FAST_SHOOT_TIMER = 300;
-    private int fastShootTimeLeft = FAST_SHOOT_TIMER;
+    private final int fast_shoot_timer = 300;
+    private int fastShootTimeLeft = fast_shoot_timer;
 
     private boolean gotRapidShoot = false;
-    private final int RAPID_SHOOT_TIMER = 150;
-    private int rapidShootTimeLeft = RAPID_SHOOT_TIMER;
+    private final int rapid_shoot_timer = 150;
+    private int rapidShootTimeLeft = rapid_shoot_timer;
 
     private int ySpeed; //current vertical speed
     private int acceleration = 1;
@@ -85,7 +85,6 @@ public abstract class Players extends Actor
         }
         getWorld().showText("", 305,760);
         getWorld().showText("", 675,760);
-        getWorld().showText("", 500,750);
         ((PVPArena)getWorld()).backgroundMusic.stop();  // Cast world type to static refernece
         Greenfoot.stop();
     }
@@ -150,7 +149,7 @@ public abstract class Players extends Actor
     {
         time++;
 
-        getWorld().showText("Time: " +Math.round(time/60 * 100.0)/100.0, 500,750);
+        getWorld().showText("Time: " +Math.round(time/60 * 100.0)/100.0, 500,750);     
         // Converts float to 2DP, ignores negative values when 2 power ups are active at once.
         getWorld().showText(Player1.p1powerup +"\n\n"+Math.abs(Math.round(Player1.p1TimeLeft/60 * 100.0)) / 100.0, 305,760);
         getWorld().showText(Player2.p2powerup +"\n\n" +Math.abs(Math.round(Player2.p2TimeLeft/60 * 100.0)) / 100.0, 675,760);
@@ -158,7 +157,7 @@ public abstract class Players extends Actor
         //getWorld().showText("p1 Lives: " +Player1.p1Lives,450,250);
         //getWorld().showText("p2 Lives: " +Player2.p2Lives,450,230);
     }
-
+    
     protected void speedBoost(String ClassName)
     {
         Actor actor = getOneObjectAtOffset(0, 0, SpeedBoost.class);
@@ -166,11 +165,11 @@ public abstract class Players extends Actor
             getWorld().removeObject(actor);
             gotSpeedBoost = true;
             gotPowerUp = true;
-            speed += 5;
+            speed = 5;
             switch (ClassName)
             {  
-                case "Player2": Player2.p2powerup = "Speed Boost!"; Player2.p2TimeLeft = SPEED_BOOST_TIMER; break;
-                case "Player1": Player1.p1powerup = "Speed Boost!"; Player1.p1TimeLeft = SPEED_BOOST_TIMER; break;
+                case "Player2": Player2.p2powerup = "Speed Boost!"; Player2.p2TimeLeft = speed_boost_timer; break;
+                case "Player1": Player1.p1powerup = "Speed Boost!"; Player1.p1TimeLeft = speed_boost_timer; break;
             }
         }
         if (gotSpeedBoost)
@@ -186,8 +185,8 @@ public abstract class Players extends Actor
             {
                 gotSpeedBoost = false;
                 gotPowerUp = false;
-                speed -= 5;
-                speedBoostTimeLeft = SPEED_BOOST_TIMER;
+                speed = 3;
+                speedBoostTimeLeft = speed_boost_timer;
                 switch (ClassName)
                 {   case "Player2": Player2.p2powerup = "";  Player2.p2TimeLeft = 0 ;break;
                     case "Player1": Player1.p1powerup = "";  Player1.p1TimeLeft = 0 ;break; 
@@ -204,8 +203,8 @@ public abstract class Players extends Actor
         if (actor != null) {
             switch (ClassName)
             {  
-                case "Player1": Player1.p1_bulletMoveSpeed = 9; Player1.p1powerup = "Fast Bullets!"; Player1.p1TimeLeft = FAST_SHOOT_TIMER; break;
-                case "Player2": Player2.p2_bulletMoveSpeed = 9; Player2.p2powerup = "Fast Bullets!"; Player2.p2TimeLeft = FAST_SHOOT_TIMER; break;
+                case "Player1": Player1.p1_bulletMoveSpeed = 9; Player1.p1powerup = "Fast Bullets!"; Player1.p1TimeLeft = fast_shoot_timer; break;
+                case "Player2": Player2.p2_bulletMoveSpeed = 9; Player2.p2powerup = "Fast Bullets!"; Player2.p2TimeLeft = fast_shoot_timer; break;
             }
             getWorld().removeObject(actor);
             gotFastShoot = true;
@@ -227,7 +226,7 @@ public abstract class Players extends Actor
                 {   case "Player1": Player1.p1_bulletMoveSpeed = 2; Player1.p1powerup = ""; Player1.p1TimeLeft = 0; break;
                     case "Player2": Player2.p2_bulletMoveSpeed = 2; Player2.p2powerup = ""; Player2.p2TimeLeft = 0; break;
                 }
-                fastShootTimeLeft = FAST_SHOOT_TIMER;
+                fastShootTimeLeft = fast_shoot_timer;
             }
         }
     }
@@ -239,8 +238,8 @@ public abstract class Players extends Actor
         Actor actor = getOneObjectAtOffset(0, 0, rapidFire.class);
         if (actor != null) {
             switch (ClassName)
-            {  case "Player1": Player1.p1shootOffset = 10; Player1.p1powerup = "Rapid Fire!"; Player1.p1TimeLeft = RAPID_SHOOT_TIMER; break;
-                case "Player2": Player2.p2shootOffset = 10; Player2.p2powerup = "Rapid Fire!"; Player2.p2TimeLeft = RAPID_SHOOT_TIMER; break;
+            {  case "Player1": Player1.p1shootOffset = 10; Player1.p1powerup = "Rapid Fire!"; Player1.p1TimeLeft = rapid_shoot_timer; break;
+                case "Player2": Player2.p2shootOffset = 10; Player2.p2powerup = "Rapid Fire!"; Player2.p2TimeLeft = rapid_shoot_timer; break;
             }
             getWorld().removeObject(actor);
             gotRapidShoot = true;
@@ -262,7 +261,7 @@ public abstract class Players extends Actor
                 {   case "Player1": Player1.p1shootOffset = 45; Player1.p1powerup = ""; Player1.p1TimeLeft = 0; break;
                     case "Player2": Player2.p2shootOffset = 45; Player2.p2powerup = ""; Player2.p2TimeLeft = 0; break;
                 }
-                rapidShootTimeLeft = RAPID_SHOOT_TIMER;
+                rapidShootTimeLeft = rapid_shoot_timer;
             }
         }
     }

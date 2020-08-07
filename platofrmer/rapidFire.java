@@ -7,10 +7,10 @@ import greenfoot.*;
  */
 public class rapidFire extends PowersUps 
 {
-public void act()
+    public void act()
     {
-      movement(4);  
-      despawn(900);
+        movement(4);  
+        despawn(900);
     }
 
 }

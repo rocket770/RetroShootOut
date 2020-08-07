@@ -22,7 +22,7 @@ public class Player1 extends Players
     private int p1shootdelay = 45;
     public static int p1shootOffset = 45;
     public static String p1Direction = "right";
-    
+
     public Player1()
     {
         p1shootdelay = 45;
@@ -32,16 +32,16 @@ public class Player1 extends Players
         p1TimeLeft = 0;
         p1Lives = 3;
     }
-    
+
     public void act() 
     {
+        displayPowerUp();
         movement("w","a","d","p1_left","p1_right","p1_still", "Player1");
         checkFall();
         Shoot();
         getLocation();
         getDirection();
-        displayPowerUp();
-        hpUpdate();
+        healthDetection();
         fastShoot("Player1");
         rapidShoot("Player1");
         speedBoost("Player1");
@@ -67,7 +67,7 @@ public class Player1 extends Players
         }
     }
 
-    private void hpUpdate()
+    private void healthDetection()
     {
         // Health updating and features for each indivudal player
         for (Object Bar1 : getWorld().getObjects(Bar.class))
@@ -129,5 +129,4 @@ public class Player1 extends Players
         y = getY();
     }
 
-    
 }

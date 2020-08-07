@@ -34,10 +34,10 @@ public abstract class PowersUps extends Actor
         }
     }
 
-    protected void despawn(int MAX_TIME_ALIVE)
+    protected void despawn(int max_time_alive)
     {
         timeAlive++;
-        if(timeAlive == MAX_TIME_ALIVE) 
+        if(timeAlive == max_time_alive) 
         {
             getWorld().removeObject(this);
         }

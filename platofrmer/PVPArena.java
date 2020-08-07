@@ -20,8 +20,8 @@ public class PVPArena extends World
             "g  dgggggd               ",
             "d              ggg       ",
             "d               d    e   ",
-            "d                        ",
-            "dgg                gggggg",
+            "d                  g     ",
+            "dgg                dggggg",
             "dddggg                ddd",
             "d        g   gg         d",
             "  p     gd  gddgg        ",
@@ -39,7 +39,7 @@ public class PVPArena extends World
     {
         // Create a new world with 1000x800 cells with a cell size of 1x1 pixels.
         super(1000, 800, 1);
-        setPaintOrder(Players.class, Bar.class, EnemyAI.class, PowersUps.class, ground.class, dirt.class);
+        setPaintOrder(Players.class, Bar.class, EnemyAI.class, PowersUps.class, ground.class);
         Bar Bar1 = new Bar("Player1", 10, 10);
         addObject(Bar1, 295,350);
         // Loops music to cycle when playing
@@ -114,6 +114,7 @@ public class PVPArena extends World
         if(group.size() == 0 && SelectEnemy.enableAI)   // if there are no enemys and enemy spawing is enabled
         {
             //enemyableToSpawn = true;
+            setBackground("background.png");
             int spawnDelay = Greenfoot.getRandomNumber(1000);   // 60/1000 chance to spawn enemy every second (1000 per act cycle assuming 60fps)
             if (spawnDelay == 1)
             {
@@ -138,10 +139,10 @@ public class PVPArena extends World
                 switch(mapChar){
                     // CASEWHERE defines each object based on the given character in the string array above.
                     case 'g':
-                    addObject(new ground(),x ,y);
+                    addObject(new ground("Grass"),x ,y);
                     break;
                     case 'd':
-                    addObject(new dirt(),x ,y);
+                    addObject(new ground("Dirt"),x ,y);
                     break;
                     case 'e':
                     addObject(new Player2(),x ,y);

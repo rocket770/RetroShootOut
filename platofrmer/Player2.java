@@ -18,11 +18,11 @@ public class Player2 extends Players
     public static int x;
     private int damageDelay = 0;
     public static int y;
-    public static int p2_bulletMoveSpeed = 2;
-    private int p2shootdelay = 45;
-    public static int p2shootOffset = 45;
+    public static int p2_bulletMoveSpeed;
+    private int p2shootdelay;
+    public static int p2shootOffset;
     public static String p2Direction = "right";
-    
+
     public Player2()
     {
         p2shootdelay = 45;
@@ -32,7 +32,7 @@ public class Player2 extends Players
         p2Lives = 3;
         p2TimeLeft = 0;
     }
-    
+
     public void act() 
     {
         Shoot();
@@ -40,12 +40,11 @@ public class Player2 extends Players
         getLocation();
         checkFall();
         getDirection();
-        displayPowerUp();
-                hpUpdate();
-
         fastShoot("Player2");
         rapidShoot("Player2");
         speedBoost("Player2");
+        healthDetection();
+
     }   
 
     private void Shoot()
@@ -68,7 +67,7 @@ public class Player2 extends Players
         }
     }
 
-    private void hpUpdate()
+    private void healthDetection()
     {
         for (Object Bar2 : getWorld().getObjects(Bar.class))
         {
