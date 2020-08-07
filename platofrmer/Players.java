@@ -165,7 +165,7 @@ public abstract class Players extends Actor
             getWorld().removeObject(actor);
             gotSpeedBoost = true;
             gotPowerUp = true;
-            speed = 5;
+            speed = 7;
             switch (ClassName)
             {  
                 case "Player2": Player2.p2powerup = "Speed Boost!"; Player2.p2TimeLeft = speed_boost_timer; break;

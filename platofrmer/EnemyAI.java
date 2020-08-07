@@ -152,7 +152,6 @@ public class EnemyAI extends Actor
         else   getWorld().setBackground(new GreenfootImage("background.png"));
     }
 
-    
     private void pathFind(int targetX, int targetY) {
         ground leftfloor = (ground) getOneObjectAtOffset(-getImage().getWidth()/2-1, 0, ground.class); // Check cell left of current position for a floor
         ground rightfloor = (ground) getOneObjectAtOffset(getImage().getWidth()/2+1, 0 , ground.class); // Check cell right of current position for a floor
@@ -174,6 +173,7 @@ public class EnemyAI extends Actor
         {
             xVel = (targetX < getX()) ? -4 : 4;
         }
+        
         getWorld().setBackground(new GreenfootImage("background.png"));
         getWorld().getBackground().drawLine(targetX, targetY, x, y);
 
