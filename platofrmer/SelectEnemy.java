@@ -27,8 +27,8 @@ public class SelectEnemy extends Buttons
             if (Greenfoot.mouseClicked(this) && dist <= radius) {
                 enableAI = !enableAI;
             }
-             getWorld().showText(""+dist, 250,250);
-             getWorld().showText(""+radius, 250,270);
+             //getWorld().showText(""+dist, 250,250);
+             //getWorld().showText(""+radius, 250,270);
 
         }
         updateImage();

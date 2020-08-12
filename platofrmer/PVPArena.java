@@ -90,6 +90,7 @@ public class PVPArena extends World
                 Random r = new Random();
                 Actor ground = (ground) getObjects(ground.class).get(0); // get reference to ground objects
                 // Grabs random ground object in world and spwans power up at a +/- 10 offset
+                // insures powerup is not spawned on object
                 if (i !=  r.nextInt(ground.getX()) + 10 || i != r.nextInt(ground.getX()) - 10) x = i;
                 if (j != r.nextInt(ground.getY()) + 10  ||j != r.nextInt(ground.getY()) - 10) y = j;
                 switch(spawnType)

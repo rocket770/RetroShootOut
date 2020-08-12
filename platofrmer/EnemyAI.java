@@ -35,8 +35,7 @@ public class EnemyAI extends Actor
         removeTouching(PowersUps.class);
         checkFall();
         stuckCheck();
-        x = getX();
-        y = getY();
+        getLocation();
         healthLoss();
     }
 
@@ -83,9 +82,9 @@ public class EnemyAI extends Actor
     {
         switch(xVel)
         {
-            case 4: 
+            case 4: Animation("enemy_right", 6);
             break;
-            case -4: 
+            case -4: Animation("enemy_left", 6);
             break;
         }
     }
@@ -108,7 +107,7 @@ public class EnemyAI extends Actor
         }
         imageDelay++;
         setImage(imagename + imageNumber + ".png");
-        getImage().scale(getImage().getWidth()-10,getImage().getHeight()-20);
+        getImage().scale(getImage().getWidth()/4,getImage().getHeight()/4);
     }
 
     private void checkFall()
@@ -128,8 +127,14 @@ public class EnemyAI extends Actor
         }
     }
 
+    private void getLocation() {
+        x = getX();
+        y = getY();   
+    }
+
     private void followEnemy()
     {
+        // Group all player objects and power up objects into a list
         List<Players> playergroup = getObjectsInRange(300,Players.class);
         //getWorld().showText("right: " +rightTarget, 390,450);
         //getWorld().showText("left: " +leftTarget, 390,430);
@@ -149,7 +154,7 @@ public class EnemyAI extends Actor
             int tY = PowersUps.getY();
             pathFind(tX, tY);
         }
-        else   getWorld().setBackground(new GreenfootImage("background.png"));
+        else if (!getWorld().getBackground().equals("background.png")) getWorld().setBackground(new GreenfootImage("background.png"));
     }
 
     private void pathFind(int targetX, int targetY) {
@@ -173,7 +178,7 @@ public class EnemyAI extends Actor
         {
             xVel = (targetX < getX()) ? -4 : 4;
         }
-        
+
         getWorld().setBackground(new GreenfootImage("background.png"));
         getWorld().getBackground().drawLine(targetX, targetY, x, y);
 
