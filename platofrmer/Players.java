@@ -57,6 +57,7 @@ public abstract class Players extends Actor
         }
         if(Greenfoot.isKeyDown(moveUp) && onGround() == true)
         {
+            // Fall if not on the ground
             ySpeed = jumpHeight;
             fall();
         }
@@ -129,18 +130,22 @@ public abstract class Players extends Actor
 
     private void fall()
     {
+        // Simulates gravity but moving the object down faster each cycle while it is not in the air 
         setLocation(getX(),getY()+ySpeed);
         ySpeed += acceleration;
     }
 
     private boolean onGround()
     {
+        // If object is standing above the ground
+        // Set false if on ground 
         Actor floor = getOneObjectAtOffset(0,getImage().getHeight()/2+1, ground.class);
         return floor != null;
     }
 
     private boolean onRoof()
     {
+        // if object is directly under or touching the bottom of the ground tile
         Actor roof = getOneObjectAtOffset(0,-getImage().getHeight()/2- 1, ground.class);
         return roof != null;
     }
@@ -162,11 +167,13 @@ public abstract class Players extends Actor
     protected void speedBoost(String ClassName)
     {
         Actor actor = getOneObjectAtOffset(0, 0, SpeedBoost.class);
+        // Acitvate affects of powerup if is touching it
         if (actor != null) {
             getWorld().removeObject(actor);
             gotSpeedBoost = true;
             gotPowerUp = true;
             speed = 7;
+            // Apply affect to the player that is touching it
             switch (ClassName)
             {  
                 case "Player2": Player2.p2powerup = "Speed Boost!"; Player2.p2TimeLeft = speed_boost_timer; break;
@@ -175,6 +182,7 @@ public abstract class Players extends Actor
         }
         if (gotSpeedBoost)
         {
+            // Count down timer for the class that has it
             switch (ClassName)
             {  
                 case "Player2": Player2.p2TimeLeft--; break;             
@@ -184,6 +192,7 @@ public abstract class Players extends Actor
             speedBoostTimeLeft--;
             if (speedBoostTimeLeft <= 0)
             {
+                // remove effects, reset time
                 gotSpeedBoost = false;
                 gotPowerUp = false;
                 speed = 3;
@@ -195,7 +204,8 @@ public abstract class Players extends Actor
             }
         }
     }
-
+    
+    // Explenation for each powerup explained above
     protected void fastShoot(String ClassName)
     {
         //getWorld().showText("p1 speed: " +Player1.p1_bulletMoveSpeed, 250, 250);
