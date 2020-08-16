@@ -29,8 +29,8 @@ public class EnemyAI extends Actor
     public static int y;
     public void act()
     {
-        defaultMove();
-        followEnemy();
+        //defaultMove();
+        //followEnemy();
         animateOnWalk();
         removeTouching(PowersUps.class);
         checkFall();
@@ -131,7 +131,7 @@ public class EnemyAI extends Actor
         x = getX();
         y = getY();   
     }
-
+    boolean target;
     private void followEnemy()
     {
         // Group all player objects and power up objects into a list
@@ -147,14 +147,17 @@ public class EnemyAI extends Actor
             int pY = Player.getY();
             //Dont jump if player is below enemy
             pathFind(pX, pY);
+            target = true;
         }
         else if(powerups.size() > 0) {
             Actor PowersUps = powerups.get(0);
             int tX = PowersUps.getX();
             int tY = PowersUps.getY();
             pathFind(tX, tY);
-        }
-        else if (!getWorld().getBackground().equals("background.png")) getWorld().setBackground(new GreenfootImage("background.png"));
+
+        }  else if (!getWorld().getBackground().equals("background.png")) getWorld().setBackground(new GreenfootImage("background.png"));
+        if(playergroup.size() == 0) target = false;
+        getWorld().showText(""+target, 250,250);
     }
 
     private void pathFind(int targetX, int targetY) {

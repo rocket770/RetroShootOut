@@ -152,7 +152,7 @@ public abstract class Players extends Actor
 
     protected void displayPowerUp()
     {
-        if(getWorld().getBackground().equals("background.png")) {
+        if(getWorld().getBackground().equals("file:/C:/Users/skrill/Desktop/School/2020/SDD/RetroShootOut/platofrmer/images/background.png")) {
             // Converts float to 2DP, ignores negative values when 2 power ups are active at once.
             getWorld().showText(Player1.p1powerup +"\n\n"+Math.abs(Math.round(Player1.p1TimeLeft/60 * 100.0)) / 100.0, 305,760);
             getWorld().showText(Player2.p2powerup +"\n\n" +Math.abs(Math.round(Player2.p2TimeLeft/60 * 100.0)) / 100.0, 675,760);
@@ -161,6 +161,7 @@ public abstract class Players extends Actor
             //getWorld().showText("p2 Lives: " +Player2.p2Lives,450,230);
         }
         time++;
+        getWorld().showText("" +getWorld().getBackground(), 500,250);
         getWorld().showText("Time: " +Math.round(time/60 * 100.0)/100.0, 500,750);     
     }
 
