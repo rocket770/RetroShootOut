@@ -29,8 +29,8 @@ public class EnemyAI extends Actor
     public static int y;
     public void act()
     {
-        //defaultMove();
-        //followEnemy();
+        defaultMove();
+        followEnemy();
         animateOnWalk();
         removeTouching(PowersUps.class);
         checkFall();
@@ -107,7 +107,7 @@ public class EnemyAI extends Actor
         }
         imageDelay++;
         setImage(imagename + imageNumber + ".png");
-        getImage().scale(getImage().getWidth()/4,getImage().getHeight()/4);
+        //getImage().scale(getImage().getWidth()/4, getImage().getHeight()/4);
     }
 
     private void checkFall()
@@ -131,7 +131,7 @@ public class EnemyAI extends Actor
         x = getX();
         y = getY();   
     }
-    boolean target;
+
     private void followEnemy()
     {
         // Group all player objects and power up objects into a list
@@ -147,7 +147,6 @@ public class EnemyAI extends Actor
             int pY = Player.getY();
             //Dont jump if player is below enemy
             pathFind(pX, pY);
-            target = true;
         }
         else if(powerups.size() > 0) {
             Actor PowersUps = powerups.get(0);
@@ -156,8 +155,6 @@ public class EnemyAI extends Actor
             pathFind(tX, tY);
 
         }  else if (!getWorld().getBackground().equals("background.png")) getWorld().setBackground(new GreenfootImage("background.png"));
-        if(playergroup.size() == 0) target = false;
-        getWorld().showText(""+target, 250,250);
     }
 
     private void pathFind(int targetX, int targetY) {

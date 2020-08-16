@@ -28,11 +28,11 @@ public class PVPArena extends World
             "        ddggdddddg       ",
             "ggggggggddddddddddggggggg",
             "ddddddddddddddddddddddddd"
-                //"ddddddddddddddddddddddddd"
         };
 
     private int x;
     private int y;
+
     // Sets vairable to control sound file through other classes or loop it
     GreenfootSound backgroundMusic = new GreenfootSound("MenuMusic.mp3");
     public PVPArena()
@@ -124,7 +124,6 @@ public class PVPArena extends World
                 addObject(Bar3, 500,320);
             }
         }
-
         //showText("enemy: " +enemyableToSpawn, 300,300);
     }
 
@@ -156,4 +155,5 @@ public class PVPArena extends World
             }
         }
     }
+
 }

@@ -44,7 +44,7 @@ public class Player2 extends Players
         rapidShoot("Player2");
         speedBoost("Player2");
         healthDetection();
-
+        displayPowerUp();
     }   
 
     private void Shoot()

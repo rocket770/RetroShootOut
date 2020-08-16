@@ -35,7 +35,7 @@ public class Player1 extends Players
 
     public void act() 
     {
-        displayPowerUp();
+        //displayPowerUp();
         movement("w","a","d","p1_left","p1_right","p1_still", "Player1");
         checkFall();
         Shoot();

@@ -38,7 +38,7 @@ public abstract class Players extends Actor
     private int ImageChangeSpeed = 10;
     // The image the animation should start at
     private int imageNumber = 1;
-
+    protected boolean canShow = true;
     protected void movement(String moveUp, String moveLeft, String moveRight, String animationLeft, String animationRight, String playerStill, String direction)
     {
         ground leftfloor = (ground) getOneObjectAtOffset(-getImage().getWidth()/2-1, 0, ground.class); // Check cell left of current position for a floor
@@ -70,6 +70,8 @@ public abstract class Players extends Actor
 
     protected void endGame(String Class)
     {
+        canShow = false;
+        Greenfoot.delay(2);
         getWorld().setBackground(new GreenfootImage(Class +"won.png"));
         getWorld().removeObjects(getWorld().getObjects(ground.class));
         getWorld().removeObjects(getWorld().getObjects(Bullet.class));
@@ -152,16 +154,15 @@ public abstract class Players extends Actor
 
     protected void displayPowerUp()
     {
-        if(getWorld().getBackground().equals("file:/C:/Users/skrill/Desktop/School/2020/SDD/RetroShootOut/platofrmer/images/background.png")) {
+        if(canShow == true) {
             // Converts float to 2DP, ignores negative values when 2 power ups are active at once.
             getWorld().showText(Player1.p1powerup +"\n\n"+Math.abs(Math.round(Player1.p1TimeLeft/60 * 100.0)) / 100.0, 305,760);
             getWorld().showText(Player2.p2powerup +"\n\n" +Math.abs(Math.round(Player2.p2TimeLeft/60 * 100.0)) / 100.0, 675,760);
-            //System.out.println(p2powerup);
             //getWorld().showText("p1 Lives: " +Player1.p1Lives,450,250);
             //getWorld().showText("p2 Lives: " +Player2.p2Lives,450,230);
+            time++;
         }
-        time++;
-        getWorld().showText("" +getWorld().getBackground(), 500,250);
+        
         getWorld().showText("Time: " +Math.round(time/60 * 100.0)/100.0, 500,750);     
     }
 
