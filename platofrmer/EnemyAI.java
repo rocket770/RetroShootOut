@@ -12,7 +12,7 @@ public class EnemyAI extends Actor
      * Act - do whatever the enemyAI wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int xVel = 4;
+    private int xVel = 6;
     private int ySpeed; //current vertical speed
     private int acceleration = 1;
     private int jumpHeight = -20;
@@ -82,9 +82,9 @@ public class EnemyAI extends Actor
     {
         switch(xVel)
         {
-            case 4: Animation("enemy_right", 6);
+            case 6: Animation("enemy_right", 6);
             break;
-            case -4: Animation("enemy_left", 6);
+            case -6: Animation("enemy_left", 6);
             break;
         }
     }
@@ -176,7 +176,7 @@ public class EnemyAI extends Actor
         // If can move, set direction relative to the players position 
         if (aiDelay <= 0 && targetY > getY() -5)
         {
-            xVel = (targetX < getX()) ? -4 : 4;
+            xVel = (targetX < getX()) ? -6 : 6;
         }
 
         getWorld().setBackground(new GreenfootImage("background.png"));
@@ -210,7 +210,7 @@ public class EnemyAI extends Actor
             {
                 int spawnType = Greenfoot.getRandomNumber(4);
                 // Will ensure there is no power up already activated and if the chance is met.
-                //System.out.println("spawnChance/n: " +spawnChance +"spawnType: " +spawnType);                         // check both types in seperate lines with /n
+                //System.out.println("spawnChance\n: " +spawnChance +"spawnType: " +spawnType);                         // check both types in seperate lines with \n
                 // can change to x,y staitc vairable declared above (Change)
                 switch(spawnType)
                 {

@@ -31,7 +31,7 @@ public class Player2 extends Players
     {
         p2shootdelay = 45;
         p2shootOffset = 45;
-        p2_bulletMoveSpeed = 2;
+        p2_bulletMoveSpeed = 6;
         p2powerup = "";
         p2Lives = 3;
         p2timeLeft = 0;

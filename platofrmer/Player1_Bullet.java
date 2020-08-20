@@ -13,7 +13,7 @@ public class Player1_Bullet extends Bullet
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private int xVelocity;
-    public static int moveSpeed = 3;
+    public static int moveSpeed = 6;
 
     // bullet constructor applied each time spawned, more efficent then constructor
 

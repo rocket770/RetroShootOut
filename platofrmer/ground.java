@@ -13,15 +13,21 @@ public class ground extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
-    public ground(String tile) 
+    ground(tile tile) 
     {
         switch(tile) {
-            case "Dirt" : setImage("dirt.jpg"); break; 
-            case "Grass": setImage("grass.jpg"); break;
+            case Dirt : setImage("dirt.jpg"); break; 
+            case Grass: setImage("grass.jpg"); break;
         }
         GreenfootImage image = getImage();
         image.scale(40,40);
     } 
+    
+    enum tile
+    {
+        Dirt,
+        Grass
+    }
     
     
 }

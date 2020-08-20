@@ -13,7 +13,7 @@ public class Player1 extends Players
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public static int p1Lives; 
-    public static int p1_bulletMoveSpeed = 2;
+    public static int p1_bulletMoveSpeed;
     public static float p1timeLeft;
     private int damageDelay = 0;
     public static int x;
@@ -30,7 +30,7 @@ public class Player1 extends Players
     {
         p1shootdelay = 45;
         p1shootOffset = 45;
-        p1_bulletMoveSpeed = 2;
+        p1_bulletMoveSpeed = 6;
         p1powerup = "";
         p1timeLeft = 0;
         p1Lives = 3;

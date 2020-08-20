@@ -11,7 +11,7 @@ public class PVPArena extends World
 {
     private String[] arena =
         {
-            "                         ",
+            " F                       ",
             "             ggggg       ",
             "gg             dd         ",
             "d                    gggg",
@@ -39,6 +39,8 @@ public class PVPArena extends World
     {
         // Create a new world with 1000x800 cells with a cell size of 1x1 pixels.
         super(1000, 800, 1);
+        Greenfoot.setSpeed(50);
+        
         setPaintOrder(Players.class, Bar.class, EnemyAI.class, PowersUps.class, ground.class);
         Bar Bar1 = new Bar("Player1", 10, 10);
         addObject(Bar1, 295,350);
@@ -139,10 +141,10 @@ public class PVPArena extends World
                 switch(mapChar){
                     // CASEWHERE defines each object based on the given character in the string array above.
                     case 'g':
-                    addObject(new ground("Grass"),x ,y);
+                    addObject(new ground(ground.tile.Grass),x ,y);
                     break;
                     case 'd':
-                    addObject(new ground("Dirt"),x ,y);
+                    addObject(new ground(ground.tile.Dirt),x ,y);
                     break;
                     case 'e':
                     addObject(new Player2(),x ,y);
@@ -150,7 +152,9 @@ public class PVPArena extends World
                     case 'p':
                     addObject(new Player1(),x ,y);
                     break;
-
+                    case 'F':
+                    addObject(new FramesPerSecond(),x,y);
+                    break;
                 }
             }
         }

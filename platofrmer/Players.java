@@ -16,7 +16,7 @@ public abstract class Players extends Actor
     private double time = 0.0F;
     public static boolean gotPowerUp = false;
 
-    private int speed =3;
+    private int speed =5;
     private boolean gotSpeedBoost = false;
     private final int speed_boost_timer = 300;
     private int speedBoostTimeLeft = speed_boost_timer;
@@ -30,8 +30,8 @@ public abstract class Players extends Actor
     private int rapidShootTimeLeft = rapid_shoot_timer;
 
     private int ySpeed; //current vertical speed
-    private int acceleration = 1;
-    private int jumpHeight = -20;
+    private int acceleration = 2;
+    private int jumpHeight = -28;
 
     // Variables used for animation speed and number of images
     private int imageDelay = 0;
@@ -79,6 +79,7 @@ public abstract class Players extends Actor
         getWorld().removeObjects(getWorld().getObjects(Bar.class));
         getWorld().removeObjects(getWorld().getObjects(EnemyAI.class));
         getWorld().removeObjects(getWorld().getObjects(Lives.class));
+        getWorld().removeObjects(getWorld().getObjects(FramesPerSecond.class));
         // Iterate through each player object in the world by casting the list into a for loop
         for (Object obj : (java.util.List<Players>)getWorld().getObjects(Players.class))
         {
@@ -174,12 +175,18 @@ public abstract class Players extends Actor
             getWorld().removeObject(actor);
             gotSpeedBoost = true;
             gotPowerUp = true;
-            speed = 7;
+            speed = 9;
             // Apply affect to the player that is touching it
             switch (ClassName)
             {  
-                case "Player2": Player2.p2powerup = "Speed Boost!"; Player2.p2timeLeft = speed_boost_timer; break;
-                case "Player1": Player1.p1powerup = "Speed Boost!"; Player1.p1timeLeft = speed_boost_timer; break;
+                case "Player2":
+                Player2.p2powerup = "Speed Boost!";
+                Player2.p2timeLeft = speed_boost_timer;
+                break;
+                case "Player1": 
+                Player1.p1powerup = "Speed Boost!";
+                Player1.p1timeLeft = speed_boost_timer; 
+                break;
             }
         }
         if (gotSpeedBoost)
@@ -197,7 +204,7 @@ public abstract class Players extends Actor
                 // remove effects, reset time
                 gotSpeedBoost = false;
                 gotPowerUp = false;
-                speed = 3;
+                speed = 5;
                 speedBoostTimeLeft = speed_boost_timer;
                 switch (ClassName)
                 {   case "Player2": 
@@ -223,12 +230,12 @@ public abstract class Players extends Actor
             switch (ClassName)
             {  
                 case "Player1": 
-                Player1.p1_bulletMoveSpeed = 9;
+                Player1.p1_bulletMoveSpeed = 11;
                 Player1.p1powerup = "Fast Bullets!"; 
                 Player1.p1timeLeft = fast_shoot_timer;
                 break;
                 case "Player2":
-                Player2.p2_bulletMoveSpeed = 9;
+                Player2.p2_bulletMoveSpeed = 11;
                 Player2.p2powerup = "Fast Bullets!"; 
                 Player2.p2timeLeft = fast_shoot_timer;
                 break;
@@ -255,12 +262,12 @@ public abstract class Players extends Actor
                 gotPowerUp = false;
                 switch (ClassName)
                 {   case "Player1":
-                    Player1.p1_bulletMoveSpeed = 2; 
+                    Player1.p1_bulletMoveSpeed = 6; 
                     Player1.p1powerup = "";
                     Player1.p1timeLeft = 0; 
                     break;
                     case "Player2": 
-                    Player2.p2_bulletMoveSpeed = 2;
+                    Player2.p2_bulletMoveSpeed = 6;
                     Player2.p2powerup = ""; 
                     Player2.p2timeLeft = 0;
                     break;
