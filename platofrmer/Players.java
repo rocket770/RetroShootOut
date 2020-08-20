@@ -55,7 +55,7 @@ public abstract class Players extends Actor
             Animation(animationRight, 3);
             direction = "right";
         }
-        if(Greenfoot.isKeyDown(moveUp) && onGround() == true)
+        if(Greenfoot.isKeyDown(moveUp) && onGround())
         {
             // Fall if not on the ground
             ySpeed = jumpHeight;
@@ -67,7 +67,7 @@ public abstract class Players extends Actor
         }
         //getImage().scale(getImage().getWidth()-10,getImage().getHeight()-20);
     }
-
+    // show end game and remove or hide all irrelevant objects
     protected void endGame(String Class)
     {
         canShow = false;
@@ -95,7 +95,7 @@ public abstract class Players extends Actor
 
     protected void checkFall()
     {
-        if (onGround() == false)
+        if (!onGround())
         {
             fall();
         }
@@ -163,7 +163,6 @@ public abstract class Players extends Actor
             //getWorld().showText("p2 Lives: " +Player2.p2Lives,450,230);
             time++;
         }
-
         getWorld().showText("Time: " +Math.round(time/60 * 100.0)/100.0, 500,750);     
     }
 

@@ -24,7 +24,7 @@ public class EnemyAI extends Actor
     // The image the animation should start at
     private int imageNumber = 1;
 
-    // Non-Abstrsct Object position in world passed to other classes
+    // Object position in world passed to other classes
     public static int x;
     public static int y;
     public void act()
@@ -112,7 +112,7 @@ public class EnemyAI extends Actor
 
     private void checkFall()
     {
-        if (onGround() == false)
+        if (!onGround())
         {
             fall();
         }

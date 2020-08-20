@@ -11,7 +11,6 @@ public class FramesPerSecond extends Actor
     private int frames = 0;
     private double lastFrameTime = 0;
     private double fps = 0.0f;
-    private boolean running = false;
     private int millisElapsed = 0;
     private long lastTime = 0;
 
@@ -44,6 +43,7 @@ public class FramesPerSecond extends Actor
             frames = 0;
         }
     }
+    // Sets objects image to transparent grey with black text that shows a rounded value of the fps counter
     
     private void updateImage() 
     {
