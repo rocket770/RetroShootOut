@@ -190,10 +190,20 @@ public class EnemyAI extends Actor
         for (Object Bar3 : getWorld().getObjects(Bar.class))
         {
             Bar enemy = (Bar) Bar3;
-            if(enemy.refName == "Enemy " && isTouching(Bullet.class))
+            if(enemy.refName == "Enemy ")
             {
-                enemy.subtract(2);
-                removeTouching(Bullet.class);
+                if(isTouching(Player1_Bullet.class)) {
+                    enemy.subtract(2);
+                    removeTouching(Player1_Bullet.class);
+                    Player1.p1damageDone+=1;
+                    Player1.p1bulletsHit++;
+                }
+                 else if(isTouching(Player2_Bullet.class)) {
+                    enemy.subtract(2);
+                    removeTouching(Player2_Bullet.class);
+                    Player2.p2damageDone+=1;
+                    Player2.p2bulletsHit++;
+                }
             }
             // drops random powerup on death that is not already in world
             if(enemy.getValue() == 0)

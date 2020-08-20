@@ -14,7 +14,7 @@ public class Player2 extends Players
      */
     public static int p2Lives; 
     public static String p2powerup = "";
-    public static float p2TimeLeft;
+    public static float p2timeLeft;
     public static int x;
     private int damageDelay = 0;
     public static int y;
@@ -22,6 +22,10 @@ public class Player2 extends Players
     private int p2shootdelay;
     public static int p2shootOffset;
     public static String p2Direction = "right";
+    public static float p2bulletsShot;
+    public static int p2bulletsHit;
+    public static int p2damageDone;
+
 
     public Player2()
     {
@@ -30,7 +34,10 @@ public class Player2 extends Players
         p2_bulletMoveSpeed = 2;
         p2powerup = "";
         p2Lives = 3;
-        p2TimeLeft = 0;
+        p2timeLeft = 0;
+        p2bulletsHit = 0;
+        p2damageDone = 0;
+        p2bulletsShot = 0.1f;
     }
 
     public void act() 
@@ -43,7 +50,7 @@ public class Player2 extends Players
         fastShoot("Player2");
         rapidShoot("Player2");
         speedBoost("Player2");
-        healthDetection();
+        healthUpdate();
         displayPowerUp();
     }   
 
@@ -56,6 +63,8 @@ public class Player2 extends Players
             getWorld().addObject(new Player2_Bullet(), getX(), getY());
             //Greenfoot.playSound("shoot.wav");
             p2shootdelay = 0;
+            p2bulletsShot++;
+
             // resets delay
             Greenfoot.playSound("gunshot.mp3");
 
@@ -67,7 +76,7 @@ public class Player2 extends Players
         }
     }
 
-    private void healthDetection()
+    private void healthUpdate()
     {
         for (Object Bar2 : getWorld().getObjects(Bar.class))
         {
@@ -77,6 +86,8 @@ public class Player2 extends Players
                 if(isTouching(Player1_Bullet.class))
                 {
                     player2.subtract(2);
+                    Player1.p1damageDone+=2;
+                    Player1.p1bulletsHit++;
                     removeTouching(Player1_Bullet.class);
                 }
                 if(isTouching(hpUp.class))

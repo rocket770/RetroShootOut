@@ -11,21 +11,23 @@ public class Bar extends Actor
     private int maxValue = 0; // the maximum value of bar
     public String refName = ""; // the title string (who or what the meter/bar is for)
 
-    public Bar(String referenceName, int initValue, int maximumValue)
+    public Bar(String refName, int initValue, int maxValue)
     {
-        // I realize i can use less varables whilst delcaring each passed through the constuctur with "this.referenceName"
-        refName = referenceName;
-        maxValue = maximumValue; //The highest the bar amount the bar will go
+        this.refName = refName;
+        this.maxValue = maxValue; //The highest the bar amount the bar will go
         add(initValue); //Sets initial value of health,
     }
-    
-      public void act()
+
+    public void act()
     {
         switch(refName)
         {
-            case "Player1": setLocation(Player1.x-5, Player1.y-50);  break;  // Teleports bar to correct object it is displaiyng forcase "Player1": setLocation(Player1.x+-5, Player1.y-50);  break;  // Teleports bar to correct object it is displaiyng for
-            case "Player2": setLocation(Player2.x-5, Player2.y-50); break;   // Teleports bar to correct object it is displaiyng for
-            case "Enemy ":  setLocation(EnemyAI.x-5, EnemyAI.y-50); break;
+            case "Player1": setLocation(Player1.x-5, Player1.y-50); 
+            break;  // Teleports bar to correct object it is displaiyng forcase "Player1": setLocation(Player1.x+-5, Player1.y-50);  break;  // Teleports bar to correct object it is displaiyng for
+            case "Player2": setLocation(Player2.x-5, Player2.y-50); 
+            break;   
+            case "Enemy ":  setLocation(EnemyAI.x-5, EnemyAI.y-50); 
+            break;
         }
     }
 
@@ -48,12 +50,18 @@ public class Bar extends Actor
             if (break_low)
             {
                 if (value > (int) (break_percent * maxValue / 100)) image.setColor(Color.GREEN);
-                else image.setColor(Color.RED);
+                else 
+                {
+                    image.setColor(Color.RED);
+                }
             }
             else
             {
                 if (value < (int) (break_percent * maxValue / 100)) image.setColor(Color.GREEN);
-                else image.setColor(Color.RED);
+                else 
+                {
+                    image.setColor(Color.RED);
+                }
             }
             image.fillRect(refName.length() * 8, (int) (10 - bar_height / 2), barValue, bar_height);
         }
@@ -86,7 +94,6 @@ public class Bar extends Actor
         }
     }
 
-  
 
     public int getValue()
     {

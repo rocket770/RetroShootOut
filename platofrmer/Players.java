@@ -86,8 +86,8 @@ public abstract class Players extends Actor
             Players player = (Players) obj;
             player.setImage(new GreenfootImage(1,1));
         }
-        getWorld().showText("", 305,760);
-        getWorld().showText("", 675,760);
+        getWorld().showText("Player 1 \n Hit Accurary: " +(int)((Player1.p1bulletsHit/Player1.p1bulletsShot)*100)+"%\nDamge Done: " +Player1.p1damageDone, 305,760);
+        getWorld().showText("Player 2 \n Hit Accurary: " +(int)((Player2.p2bulletsHit/Player2.p2bulletsShot)*100)+"%\nDamge Done: " +Player2.p2damageDone, 675,760);
         ((PVPArena)getWorld()).backgroundMusic.stop();  // Cast world type to static refernece
         Greenfoot.stop();
     }
@@ -156,13 +156,13 @@ public abstract class Players extends Actor
     {
         if(canShow == true) {
             // Converts float to 2DP, ignores negative values when 2 power ups are active at once.
-            getWorld().showText(Player1.p1powerup +"\n\n"+Math.abs(Math.round(Player1.p1TimeLeft/60 * 100.0)) / 100.0, 305,760);
-            getWorld().showText(Player2.p2powerup +"\n\n" +Math.abs(Math.round(Player2.p2TimeLeft/60 * 100.0)) / 100.0, 675,760);
+            getWorld().showText(Player1.p1powerup +"\n\n"+Math.abs(Math.round(Player1.p1timeLeft/60 * 100.0)) / 100.0, 305,760);
+            getWorld().showText(Player2.p2powerup +"\n\n" +Math.abs(Math.round(Player2.p2timeLeft/60 * 100.0)) / 100.0, 675,760);
             //getWorld().showText("p1 Lives: " +Player1.p1Lives,450,250);
             //getWorld().showText("p2 Lives: " +Player2.p2Lives,450,230);
             time++;
         }
-        
+
         getWorld().showText("Time: " +Math.round(time/60 * 100.0)/100.0, 500,750);     
     }
 
@@ -178,8 +178,8 @@ public abstract class Players extends Actor
             // Apply affect to the player that is touching it
             switch (ClassName)
             {  
-                case "Player2": Player2.p2powerup = "Speed Boost!"; Player2.p2TimeLeft = speed_boost_timer; break;
-                case "Player1": Player1.p1powerup = "Speed Boost!"; Player1.p1TimeLeft = speed_boost_timer; break;
+                case "Player2": Player2.p2powerup = "Speed Boost!"; Player2.p2timeLeft = speed_boost_timer; break;
+                case "Player1": Player1.p1powerup = "Speed Boost!"; Player1.p1timeLeft = speed_boost_timer; break;
             }
         }
         if (gotSpeedBoost)
@@ -187,8 +187,8 @@ public abstract class Players extends Actor
             // Count down timer for the class that has it
             switch (ClassName)
             {  
-                case "Player2": Player2.p2TimeLeft--; break;             
-                case "Player1": Player1.p1TimeLeft--; break;             
+                case "Player2": Player2.p2timeLeft--; break;             
+                case "Player1": Player1.p1timeLeft--; break;             
             }
             //System.out.println("Speed Boost: " +gotSpeedBoost +" / "+speedBoostTimeLeft);
             speedBoostTimeLeft--;
@@ -200,13 +200,19 @@ public abstract class Players extends Actor
                 speed = 3;
                 speedBoostTimeLeft = speed_boost_timer;
                 switch (ClassName)
-                {   case "Player2": Player2.p2powerup = "";  Player2.p2TimeLeft = 0 ;break;
-                    case "Player1": Player1.p1powerup = "";  Player1.p1TimeLeft = 0 ;break; 
+                {   case "Player2": 
+                    Player2.p2powerup = "";  
+                    Player2.p2timeLeft = 0 
+                    ;break;
+                    case "Player1": 
+                    Player1.p1powerup = ""; 
+                    Player1.p1timeLeft = 0 ;
+                    break; 
                 }
             }
         }
     }
-    
+
     // Explenation for each powerup explained above
     protected void fastShoot(String ClassName)
     {
@@ -216,8 +222,16 @@ public abstract class Players extends Actor
         if (actor != null) {
             switch (ClassName)
             {  
-                case "Player1": Player1.p1_bulletMoveSpeed = 9; Player1.p1powerup = "Fast Bullets!"; Player1.p1TimeLeft = fast_shoot_timer; break;
-                case "Player2": Player2.p2_bulletMoveSpeed = 9; Player2.p2powerup = "Fast Bullets!"; Player2.p2TimeLeft = fast_shoot_timer; break;
+                case "Player1": 
+                Player1.p1_bulletMoveSpeed = 9;
+                Player1.p1powerup = "Fast Bullets!"; 
+                Player1.p1timeLeft = fast_shoot_timer;
+                break;
+                case "Player2":
+                Player2.p2_bulletMoveSpeed = 9;
+                Player2.p2powerup = "Fast Bullets!"; 
+                Player2.p2timeLeft = fast_shoot_timer;
+                break;
             }
             getWorld().removeObject(actor);
             gotFastShoot = true;
@@ -227,8 +241,12 @@ public abstract class Players extends Actor
         {
             switch (ClassName)
             {  
-                case "Player2": Player2.p2TimeLeft--; break;             
-                case "Player1": Player1.p1TimeLeft--; break;             
+                case "Player2": 
+                Player2.p2timeLeft--;
+                break;             
+                case "Player1":
+                Player1.p1timeLeft--;
+                break;             
             }
             fastShootTimeLeft--;
             if (fastShootTimeLeft <= 0)
@@ -236,8 +254,16 @@ public abstract class Players extends Actor
                 gotFastShoot = false;
                 gotPowerUp = false;
                 switch (ClassName)
-                {   case "Player1": Player1.p1_bulletMoveSpeed = 2; Player1.p1powerup = ""; Player1.p1TimeLeft = 0; break;
-                    case "Player2": Player2.p2_bulletMoveSpeed = 2; Player2.p2powerup = ""; Player2.p2TimeLeft = 0; break;
+                {   case "Player1":
+                    Player1.p1_bulletMoveSpeed = 2; 
+                    Player1.p1powerup = "";
+                    Player1.p1timeLeft = 0; 
+                    break;
+                    case "Player2": 
+                    Player2.p2_bulletMoveSpeed = 2;
+                    Player2.p2powerup = ""; 
+                    Player2.p2timeLeft = 0;
+                    break;
                 }
                 fastShootTimeLeft = fast_shoot_timer;
             }
@@ -251,8 +277,16 @@ public abstract class Players extends Actor
         Actor actor = getOneObjectAtOffset(0, 0, rapidFire.class);
         if (actor != null) {
             switch (ClassName)
-            {  case "Player1": Player1.p1shootOffset = 10; Player1.p1powerup = "Rapid Fire!"; Player1.p1TimeLeft = rapid_shoot_timer; break;
-                case "Player2": Player2.p2shootOffset = 10; Player2.p2powerup = "Rapid Fire!"; Player2.p2TimeLeft = rapid_shoot_timer; break;
+            {  case "Player1": 
+                Player1.p1shootOffset = 10;
+                Player1.p1powerup = "Rapid Fire!"; 
+                Player1.p1timeLeft = rapid_shoot_timer;
+                break;
+                case "Player2": 
+                Player2.p2shootOffset = 10;
+                Player2.p2powerup = "Rapid Fire!";
+                Player2.p2timeLeft = rapid_shoot_timer; 
+                break;
             }
             getWorld().removeObject(actor);
             gotRapidShoot = true;
@@ -262,8 +296,12 @@ public abstract class Players extends Actor
         {
             switch (ClassName)
             {  
-                case "Player2": Player2.p2TimeLeft--; break;             
-                case "Player1": Player1.p1TimeLeft--; break;             
+                case "Player2": 
+                Player2.p2timeLeft--;
+                break;             
+                case "Player1": 
+                Player1.p1timeLeft--; 
+                break;             
             }
             rapidShootTimeLeft--;
             if (rapidShootTimeLeft <= 0)
@@ -271,8 +309,16 @@ public abstract class Players extends Actor
                 gotRapidShoot = false;
                 gotPowerUp = false;
                 switch (ClassName)
-                {   case "Player1": Player1.p1shootOffset = 45; Player1.p1powerup = ""; Player1.p1TimeLeft = 0; break;
-                    case "Player2": Player2.p2shootOffset = 45; Player2.p2powerup = ""; Player2.p2TimeLeft = 0; break;
+                {   case "Player1": 
+                    Player1.p1shootOffset = 45; 
+                    Player1.p1powerup = ""; 
+                    Player1.p1timeLeft = 0; 
+                    break;
+                    case "Player2": 
+                    Player2.p2shootOffset = 45; 
+                    Player2.p2powerup = ""; 
+                    Player2.p2timeLeft = 0; 
+                    break;
                 }
                 rapidShootTimeLeft = rapid_shoot_timer;
             }

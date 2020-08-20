@@ -14,7 +14,7 @@ public class Player1 extends Players
      */
     public static int p1Lives; 
     public static int p1_bulletMoveSpeed = 2;
-    public static float p1TimeLeft;
+    public static float p1timeLeft;
     private int damageDelay = 0;
     public static int x;
     public static int y;
@@ -22,6 +22,9 @@ public class Player1 extends Players
     private int p1shootdelay = 45;
     public static int p1shootOffset = 45;
     public static String p1Direction = "right";
+    public static float p1bulletsShot;
+    public static int p1bulletsHit;
+    public static int p1damageDone;
 
     public Player1()
     {
@@ -29,8 +32,11 @@ public class Player1 extends Players
         p1shootOffset = 45;
         p1_bulletMoveSpeed = 2;
         p1powerup = "";
-        p1TimeLeft = 0;
+        p1timeLeft = 0;
         p1Lives = 3;
+        p1bulletsHit = 0;
+        p1damageDone = 0;
+        p1bulletsShot = 0.1f;
     }
 
     public void act() 
@@ -41,7 +47,7 @@ public class Player1 extends Players
         Shoot();
         getLocation();
         getDirection();
-        healthDetection();
+        healthUpdate();
         fastShoot("Player1");
         rapidShoot("Player1");
         speedBoost("Player1");
@@ -56,6 +62,7 @@ public class Player1 extends Players
             getWorld().addObject(new Player1_Bullet(), getX(), getY());
             //Greenfoot.playSound("shoot.wav");
             p1shootdelay = 0;
+            p1bulletsShot++;
             // resets delay
             Greenfoot.playSound("gunshot.mp3");
 
@@ -67,7 +74,7 @@ public class Player1 extends Players
         }
     }
 
-    private void healthDetection()
+    private void healthUpdate()
     {
         // Health updating and features for each indivudal player
         for (Object Bar1 : getWorld().getObjects(Bar.class))
@@ -80,6 +87,8 @@ public class Player1 extends Players
                 if(isTouching(Player2_Bullet.class))
                 {
                     player1.subtract(2);
+                    Player2.p2damageDone+=2;
+                    Player2.p2bulletsHit++;
                     removeTouching(Player2_Bullet.class);
                 }
                 if(isTouching(hpUp.class))
