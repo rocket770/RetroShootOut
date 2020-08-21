@@ -108,6 +108,7 @@ public class PVPArena extends World
                 }
             }
         }
+        
     }
 
     private void spawnEnemy()
